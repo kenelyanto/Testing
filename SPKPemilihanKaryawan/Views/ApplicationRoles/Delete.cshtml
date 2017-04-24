@@ -1,0 +1,229 @@
+﻿@model SistemPendukungKeputusan.Models.Security.SistemPendukungKeputusanApplicationRole
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@section css{
+    @Styles.Render("~/bundles/metronic/styles/plugin-select2")
+}
+@section jsPlugin{
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-select2")
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm(@ViewContext.RouteData.Values["action"].ToString(), @ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-basket font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            Application Role
+                        </span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption font-blue-sharp">
+                                    <span class="caption-subject bold uppercase">
+                                        @ViewBag.Title
+                                    </span>
+                                </div>
+                                @Html.Partial("~/Views/Shared/_ActionButtonPartial.cshtml", Model, new ViewDataDictionary { { "status", "Entered" } })
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_general" data-toggle="tab" aria-expanded="true"> Details </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_modules" data-toggle="tab" aria-expanded="true"> Access </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_general">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                @Html.DisplayFor(model => model.Name)
+
+                                                @Html.DisplayFor(model => model.Active)
+
+                                                @Html.DisplayFor(model => model.IsSuperAdmin)
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade in" id="tab_modules">
+                                        <div class="form-body">
+                                            @*Master*@
+                                            <div class="form-group">
+                                                <div class="portlet box blue">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            Master
+                                                        </div>
+                                                        <div class="tools">
+                                                            <a href="" class="expand" data-original-title="" title=""> </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body" style="display: none;">
+                                                        @*Vacancies*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Vacancies
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.Vacancy_Create)
+                                                                @Html.DisplayFor(model => model.Vacancy_Delete)
+                                                                @Html.DisplayFor(model => model.Vacancy_Edit)
+                                                                @Html.DisplayFor(model => model.Vacancy_Navigate)
+                                                                @Html.DisplayFor(model => model.Vacancy_Read)
+                                                            </div>
+                                                        </div>
+                                                        @*Employee Candidates*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Employee Candidates
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.EmployeeCandidate_Create)
+                                                                @Html.DisplayFor(model => model.EmployeeCandidate_Delete)
+                                                                @Html.DisplayFor(model => model.EmployeeCandidate_Edit)
+                                                                @Html.DisplayFor(model => model.EmployeeCandidate_Navigate)
+                                                                @Html.DisplayFor(model => model.EmployeeCandidate_Read)
+                                                            </div>
+                                                        </div>
+                                                        @*Report*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Report
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.Report_Create)
+                                                                @Html.DisplayFor(model => model.Report_Delete)
+                                                                @Html.DisplayFor(model => model.Report_Edit)
+                                                                @Html.DisplayFor(model => model.Report_Navigate)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*Inquiry*@
+                                            <div class="form-group">
+                                                <div class="portlet box blue">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            Inquiry
+                                                        </div>
+                                                        <div class="tools">
+                                                            <a href="" class="expand" data-original-title="" title=""> </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body" style="display: none;">
+                                                        @*Report Inquiry*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Report
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.Report_Read)
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*System*@
+                                            <div class="form-group">
+                                                <div class="portlet box blue">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            System
+                                                        </div>
+                                                        <div class="tools">
+                                                            <a href="" class="expand" data-original-title="" title=""> </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body" style="display: none;">
+
+                                                        @*Application Role*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Application Role
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.ApplicationRole_Create)
+                                                                @Html.DisplayFor(model => model.ApplicationRole_Delete)
+                                                                @Html.DisplayFor(model => model.ApplicationRole_Edit)
+                                                                @Html.DisplayFor(model => model.ApplicationRole_Navigate)
+                                                                @Html.DisplayFor(model => model.ApplicationRole_Read)
+                                                            </div>
+                                                        </div>
+
+                                                        @*Application User*@
+                                                        <div class="portlet box blue">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    Application User
+                                                                </div>
+                                                                <div class="tools">
+                                                                    <a href="" class="expand" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body" style="display: none;">
+                                                                @Html.DisplayFor(model => model.ApplicationUser_Create)
+                                                                @Html.DisplayFor(model => model.ApplicationUser_Delete)
+                                                                @Html.DisplayFor(model => model.ApplicationUser_Edit)
+                                                                @Html.DisplayFor(model => model.ApplicationUser_Navigate)
+                                                                @Html.DisplayFor(model => model.ApplicationUser_Read)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Partial("~/Views/Shared/_ActionButtonPartial.cshtml", Model, new ViewDataDictionary { { "status", "Entered" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

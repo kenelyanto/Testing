@@ -1,0 +1,22 @@
+﻿@model string
+<div class="form-group form-md-line-input">
+    <label class="control-label col-md-4">
+    @if (ViewData["CustomDisplayName"] != null)
+    {
+        @Html.DisplayName((string)ViewData["CustomDisplayName"])
+    }
+    else
+    {
+        @Html.DisplayNameFor(model => model)
+    }
+    @{
+        if (ViewData.ModelMetadata.IsRequired)
+        {
+            <span class="required">*</span>
+        }
+    }</label>
+    <div class='col-md-4'>
+        @Html.TextAreaFor(model => model, new { @class = "form-control", placeholder=Html.DisplayNameFor(model => model), @rows = "3" })
+        <div class="form-control-focus"></div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@model VoucherPricing
+<div class="form-group form-md-line-input">
+    <label class="control-label col-md-4">
+        @if (ViewData["CustomDisplayName"] != null)
+        {
+            @Html.DisplayName((string)ViewData["CustomDisplayName"])
+        }
+        else
+        {
+            @Html.DisplayNameFor(model => model)
+        }
+    </label>
+    <div class='col-md-4'>
+        @Html.TextBox("Total", Model.GetTotalPrice, new { @class = "form-control bold", placeholder = Html.DisplayNameFor(model => model), @readonly = true })
+        <div class="form-control-focus"></div>
+    </div>
+</div>

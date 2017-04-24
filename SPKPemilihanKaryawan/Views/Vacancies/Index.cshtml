@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SistemPendukungKeputusan.Models.Vacancy>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section css{
+    @Styles.Render("~/bundles/metronic/styles/plugin-select2")
+    @Styles.Render("~/bundles/metronic/styles/plugin-datatables")
+}
+@section jsPlugin{
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-select2")
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-datatables")
+}
+@section jsRuntime{
+    <script>
+        $(document).ready(function () {
+            MyApp().dataTables().init({
+                "id": "VacanciesDatatable",
+                "src": "@Url.Action("ShowIndexList", "Vacancies")",
+            });
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12">
+        @{
+            if (ViewBag.Note != null)
+            {
+                <div class="note note-danger">
+                    <p> @ViewBag.Note</p>
+                </div>
+            }
+        }
+        <!-- Begin: life time stats -->
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings"></i>
+                    <span class="Uppercase">List Vacancy</span>
+                </div>
+            </div>
+            @{
+                var dtSetting = SPKPemilihanKaryawan.Controllers.VacanciesController.IndexListDatatableSetting();
+            }
+            <div class="portlet-body">
+                <div class="table-container">
+                    @Html.Partial("~/Views/Shared/_ActionButtonPartial.cshtml", Model, new ViewDataDictionary { { "status", "" } })
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="VacanciesDatatable">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th width="2%">
+                                    <input type="checkbox" class="group-checkable">
+                                </th>
+                                <th width="10%"> Actions </th>
+
+                                @foreach (var columnSetting in dtSetting.ColumnSettings)
+                                {
+                                    <td width="@columnSetting.ColumnWidth">@columnSetting.Caption</td>
+                                }
+                            </tr>
+                            <tr role="row" class="filter">
+                                <td> </td>
+                                <td>
+                                    <div class="margin-bottom-5">
+                                        <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                            <i class="fa fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-sm red btn-outline filter-cancel">
+                                        <i class="fa fa-times"></i> Reset
+                                    </button>
+                                </td>
+
+                                @foreach (var columnSetting in dtSetting.ColumnSettings)
+                                {
+                                    <td>@Html.MetronicListViewFilter(columnSetting)</td>
+                                }
+                            </tr>
+
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End: life time stats -->
+    </div>
+</div>

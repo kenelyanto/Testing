@@ -1,0 +1,53 @@
+﻿@model SistemPendukungKeputusan.Models.Vacancy
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@section css{
+    @Styles.Render("~/bundles/metronic/styles/plugin-select2")
+}
+@section jsPlugin{
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-select2")
+}
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-basket font-green-sharp"></i>
+            <span class="caption-subject font-green-sharp bold uppercase">
+                @ViewContext.RouteData.Values["controller"]
+            </span>
+            <span class="caption-helper">@ViewContext.RouteData.Values["action"]</span>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_details" data-toggle="tab" aria-expanded="true"> Details </a>
+            </li>
+            @Html.Partial("~/Views/Shared/_ActionButtonPartial.cshtml", Model, new ViewDataDictionary { { "status", "Entered" } })
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_details">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.DisplayFor(model => model.Name)
+
+                        @Html.DisplayFor(model => model.Active)
+
+                        @Html.DisplayFor(model => model.Study)
+
+                        @Html.DisplayFor(model => model.Experience)
+
+                        @Html.DisplayFor(model => model.Certificate)
+
+                        @Html.DisplayFor(model => model.Age)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix margin-bottom-20"> </div>
+    </div>
+</div>

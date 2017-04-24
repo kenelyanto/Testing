@@ -1,0 +1,22 @@
+﻿@model Int32?
+<div class="form-group form-md-line-input">
+    <label class="control-label col-md-4">
+        @if (ViewData["CustomDisplayName"] != null)
+        {
+            @Html.DisplayName((string)ViewData["CustomDisplayName"])
+        }
+        else
+        {
+            @Html.DisplayNameFor(model => model)
+        }
+        @{
+            if (ViewData.ModelMetadata.IsRequired)
+            {
+                <span class="required">*</span>
+            }
+        }
+    </label>
+    <div class="col-md-4">
+        @Html.DropDownListFor(model =>model,(SelectList)ViewData["selectlist"], "--Select a " + ViewData.ModelMetadata.DisplayName + "--", new { @class = "form-control select2me" })
+    </div>
+</div>

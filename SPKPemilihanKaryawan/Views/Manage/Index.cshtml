@@ -1,0 +1,31 @@
+﻿@model SPKPemilihanKaryawan.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body form">
+            <div class="form-body">
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <div class="form-group">
+                            Password: <br />
+                            [
+                            @if (Model.HasPassword)
+                            {
+                                @Html.ActionLink("Change your password", "ChangePassword")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Create", "SetPassword")
+                            }
+                            ]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,174 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using SistemPendukungKeputusan.Models
+
+@{
+    SistemPendukungKeputusan.DAL.SPKContext dbcontext = new SistemPendukungKeputusan.DAL.SPKContext();
+    string status = ViewData["status"].ToString();
+    string currentUserId = User.Identity.GetUserId();
+    IdentityUser currentUser = dbcontext.Users.FirstOrDefault(x => x.Id == currentUserId);
+}
+
+<!-- #region Entered -->
+@if (status == "Entered")
+{
+    if (@ViewContext.RouteData.Values["action"].ToString() == "Create" || @ViewContext.RouteData.Values["action"].ToString() == "Edit")
+    {
+        <div class='btn-set pull-right'>
+            <a href="#" onclick="history.go(-1);" class="btn red-haze">
+                <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+            </a>
+            <button type='submit' class='btn blue-soft btnSave' name='submit' value="btnSave"><i class='fa fa-save'></i>&nbsp;Save</button>
+            <button type='submit' class='btn blue-soft btnSaveAndClose' name='submit' value="btnSaveAndClose"><i class='fa fa-save'></i>&nbsp;Save &amp; Close</button>
+        </div>
+    }
+    else if (@ViewContext.RouteData.Values["action"].ToString() == "Delete")
+    {
+        using (Html.BeginForm(@ViewContext.RouteData.Values["action"].ToString(), @ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="btn-set pull-right">
+                <a href="#" onclick="history.go(-1);" class="btn red-haze">
+                    <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                </a>
+                <button type='submit' value="Delete" class="btn blue-steel"><i class='fa fa-trash-o'></i>&nbsp;Delete</button>
+            </div>
+        }
+    }
+    else if (@ViewContext.RouteData.Values["action"].ToString() == "Details")
+    {
+        if (@ViewContext.RouteData.Values["controller"].ToString() == "Vacancies")
+        {
+            <div class="form-group">
+                <div class='btn-set pull-right'>
+                    <a href="@Url.Action("Index", "Vacancies")" class="btn red-haze">
+                        <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                    </a>
+                    @if (((Vacancy)Model).EmployeeCandidates.Count > 1)
+                    {
+                        if (((Vacancy)Model).NeedProcess)
+                        {
+                            <a href="#" onclick="document.getElementsByName('frmProcess')[0].submit();" class="btn blue-soft">
+                                <i class='fa fa-check'></i>&nbsp; Process
+                            </a>
+                            using (Html.BeginForm("Process", @ViewContext.RouteData.Values["controller"].ToString(), new { id = Model.Id }, FormMethod.Post, new { role = "form", name = "frmProcess" }))
+                            {
+                                @Html.AntiForgeryToken();
+                            }
+                        }
+                        else
+                        {
+                            <a href="#" onclick="document.getElementsByName('frmPreviewReport')[0].submit();" class="btn blue-soft">
+                                <i class='fa fa-print'></i>&nbsp; Preview Report
+                            </a>
+                            using (Html.BeginForm("ShowReport", "Reports", FormMethod.Post, new { role = "form", name = "frmPreviewReport" }))
+                            {
+                                SistemPendukungKeputusan.Models.ShowReportParameters showReportParameters = new SistemPendukungKeputusan.Models.ShowReportParameters();
+                                var report = dbcontext.Reports.Where(c => c.FileName == "SPK.rpt").FirstOrDefault();
+                                if (report != null)
+                                {
+                                    showReportParameters.ReportId = report.Id;
+                                    showReportParameters.VacancyId = ((Vacancy)Model).Id;
+                                    @Html.Hidden("ReportId", showReportParameters.ReportId);
+                                    @Html.Hidden("VacancyId", showReportParameters.VacancyId);
+                                }
+                                @Html.AntiForgeryToken()
+                            }
+                        }
+                    }
+                </div>
+
+            </div>
+        }
+        else if (@ViewContext.RouteData.Values["controller"].ToString() == "EmployeeCandidates")
+        {
+            <div class="form-group">
+                <div class='btn-set pull-right'>
+                    @using (Html.BeginForm("Details", "Vacancies", new { id = Model.VacancyId }, FormMethod.Post, new { role = "form", name = "frmBack" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    }
+                    <a href="#" onclick="document.getElementsByName('frmBack')[0].submit();" class="btn red-haze">
+                        <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                    </a>
+                    &nbsp;
+
+                </div>
+            </div>
+        }
+        else if (@ViewContext.RouteData.Values["controller"].ToString() == "Reports")
+        {
+            <div class="form-group">
+                <div class='btn-set pull-right'>
+                    <a href="@Url.Action("Index", "Reports")" class="btn red-haze">
+                        <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                    </a>
+                </div>
+            </div>
+        }
+        else if (@ViewContext.RouteData.Values["controller"].ToString() == "ApplicationRoles")
+        {
+            <div class="form-group">
+                <div class='btn-set pull-right'>
+                    <a href="@Url.Action("Index", "ApplicationRoles")" class="btn red-haze">
+                        <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                    </a>
+                </div>
+            </div>
+        }
+        else if (@ViewContext.RouteData.Values["controller"].ToString() == "ApplicationUsers")
+        {
+            <div class="form-group">
+                <div class='btn-set pull-right'>
+                    <a href="@Url.Action("Index", "ApplicationUsers")" class="btn red-haze">
+                        <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                    </a>
+                </div>
+            </div>
+        }
+    }
+}
+<!-- #endregion -->
+<!-- #region Submitted -->
+
+@if (status == "Submitted")
+{
+    if (@ViewContext.RouteData.Values["action"].ToString() == "Create" || @ViewContext.RouteData.Values["action"].ToString() == "Edit" || @ViewContext.RouteData.Values["action"].ToString() == "Delete")
+    {
+        <div class='btn-set pull-right'>
+            <a href="#" onclick="history.go(-1);" class="btn red-haze">
+                <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+            </a>
+        </div>
+    }
+    else if (@ViewContext.RouteData.Values["action"].ToString() == "Details")
+    {
+        <div class="form-group">
+            <div class='btn-set pull-right'>
+                @using (Html.BeginForm("Index", @ViewContext.RouteData.Values["controller"].ToString(), new { id = Model.Id }, FormMethod.Post, new { role = "form", name = "frmBack" }))
+                {
+                    @Html.AntiForgeryToken()
+                }
+                <a href="#" onclick="document.getElementsByName('frmBack')[0].submit();" class="btn red-haze">
+                    <i class='fa fa-arrow-circle-left'></i>&nbsp; Back
+                </a>
+            </div>
+        </div>
+    }
+
+}
+<!-- #endregion -->
+<!-- #region "" -->
+@if (status == "")
+{
+    if (@ViewContext.RouteData.Values["action"].ToString() == "Index")
+    {
+        <div class="table-actions-wrapper">
+            <span> </span>
+            <a href="@Url.Action("Create")" class="btn blue-soft">
+                <i class='fa fa-plus'>&nbsp;</i>Create New
+            </a>
+        </div>
+    }
+}
+<!-- #endregion -->

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Sistem Pendukung Keputusan</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN LAYOUT FIRST STYLES -->
+    <link href="//fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css" />
+    <!-- END LAYOUT FIRST STYLES -->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/bundles/metronic/styles/global-mandatory")
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("css", required: false)
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    @Styles.Render("~/bundles/metronic/styles/global-theme")
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    @Styles.Render("~/bundles/metronic/styles/theme-layout")
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+    <!-- BEGIN HEADER -->
+    @Html.Partial("_HeaderPartial")
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN SIDEBAR -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            @Html.Partial("_SidebarPartial")
+            <!-- END SIDEBAR -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEAD-->
+                <!-- END PAGE HEAD-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                @Html.Partial("_BreadcrumbsPartial")
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE BASE CONTENT -->
+                @RenderBody()
+                <!-- END PAGE BASE CONTENT -->
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    @Html.Partial("_FooterPartial")
+    <!-- END FOOTER -->
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    @Scripts.Render("~/bundles/metronic/scripts/core-plugin")
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @RenderSection("jsPlugin", required: false)
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    @Scripts.Render("~/bundles/metronic/scripts/theme-global")
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    @RenderSection("js", required: false)
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    @Scripts.Render("~/bundles/metronic/scripts/theme-layout")
+    <!-- END THEME LAYOUT SCRIPTS -->
+    @Scripts.Render("~/bundles/myapp")
+    @Scripts.Render("~/bundles/uicontrol")
+    @RenderSection("jsRuntime", required: false)
+</body>
+</html>

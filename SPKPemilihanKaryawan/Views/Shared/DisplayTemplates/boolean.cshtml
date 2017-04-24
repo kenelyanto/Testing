@@ -1,0 +1,23 @@
+﻿@model bool
+<div class="form-group form-md-line-input">
+    <div class="col-md-offset-4 col-md-4">
+        <div class="md-checkbox-list">
+            <div class="md-checkbox">
+                @Html.CheckBoxFor(model => model, new { @class = "md-check", @disabled=true })
+                <label class="bold" for="@Html.IdFor(model => model)">
+                    <span></span>
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    @if (ViewData["CustomDisplayName"] != null)
+                    {
+                        @Html.DisplayName((string)ViewData["CustomDisplayName"])
+                    }
+                    else
+                    {
+                        @Html.DisplayNameFor(model => model)
+                    }
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

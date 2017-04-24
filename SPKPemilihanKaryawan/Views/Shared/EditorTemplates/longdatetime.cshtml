@@ -1,0 +1,38 @@
+﻿@model DateTime?
+<div class="form-group form-md-line-input">
+    <label class="control-label col-md-4">
+        @if (ViewData["CustomDisplayName"] != null)
+        {
+            @Html.DisplayName((string)ViewData["CustomDisplayName"])
+        }
+        else
+        {
+            @Html.DisplayNameFor(model => model)
+        }
+        @{
+            if (ViewData.ModelMetadata.IsRequired)
+            {
+                <span class="required">*</span>
+            }
+        }
+    </label>
+    <div class="col-md-4">
+        <div class="input-group date datetime-picker">
+            @if (Model.HasValue)
+            {
+                string datevalue = Model.GetValueOrDefault().ToString(@"M/d/yyyy HH:mm").Replace("-","/");
+
+                <input type="text" name="@ViewData.ModelMetadata.PropertyName" value="@datevalue" size="16" readonly="" class="form-control">
+            }
+            else
+            {
+                <input type="text" name="@ViewData.ModelMetadata.PropertyName" value="" size="16" readonly="" class="form-control">
+            }
+            <span class="input-group-btn">
+                <button class="btn default date-set" type="button">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

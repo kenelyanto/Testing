@@ -1,0 +1,65 @@
+﻿@model SistemPendukungKeputusan.Models.ShowReportParameters
+
+@{
+    ViewBag.Title = "Select Parameter";
+}
+
+@section css{
+    @Styles.Render("~/bundles/metronic/styles/plugin-select2")
+    @Styles.Render("~/bundles/metronic/styles/plugin-datetimepicker")
+}
+@section jsPlugin{
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-select2")
+    @Scripts.Render("~/bundles/metronic/scripts/plugin-datetimepicker")
+}
+@section jsRuntime{
+    <script>
+        $(document).ready(function () {
+            MyApp().datePicker();
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm(@ViewContext.RouteData.Values["action"].ToString(), @ViewContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-basket font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            @ViewContext.RouteData.Values["controller"]
+                        </span>
+                        <span class="caption-helper">@ViewContext.RouteData.Values["action"]</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div class="portlet light bordered">
+                            <div class="portlet-title">
+                                <div class="caption font-blue-sharp">
+                                    <span class="caption-subject bold uppercase">
+                                        @ViewBag.Title
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                @Html.EditorFor(model => model.ReportId, new { selectlist = ViewBag.ReportId })
+
+                                @Html.EditorFor(model => model.VacancyId, new { selectlist = ViewBag.VacancyId })
+                            </div>
+                            <div class="form-group">
+                                <div class='btn-set pull-right'>
+                                    <button type='submit' class='btn blue-soft' name='submit' value="btnSave"><i class='fa fa-save'></i>&nbsp;Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

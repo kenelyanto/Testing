@@ -1,0 +1,18 @@
+﻿@model double?
+<div class="form-group form-md-line-input">
+    <label class="control-label col-md-4">
+        @if (ViewData["CustomDisplayName"] != null)
+        {
+            @Html.DisplayName((string)ViewData["CustomDisplayName"])
+        }
+        else
+        {
+            @Html.DisplayNameFor(model => model)
+        }
+    </label>
+    <div class='col-md-4'>
+        @Html.TextBox(ViewData.ModelMetadata.PropertyName, Model.GetValueOrDefault().ToString("#,#.##"), new { @class = "form-control bold number", placeholder = 0, @readonly = true })
+        <div class="form-control-focus"></div>
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿
+@if (ViewBag.Breadcrumbs != null)
+{
+    <ul class="page-breadcrumb breadcrumb">
+
+        @for (int i = 0; i < ViewBag.Breadcrumbs.Count - 1; i++)
+        {
+            <li>
+                <a href="@ViewBag.Breadcrumbs[i].Link">@ViewBag.Breadcrumbs[i].Name</a>
+                <i class="fa fa-circle"></i>
+            </li>
+        }
+        <li>
+            <span class="active">@ViewBag.Breadcrumbs[ViewBag.Breadcrumbs.Count - 1].Name</span>
+        </li>
+    </ul>
+}
+
+@{
+    if (TempData["InfoNote"] != null)
+    {
+        <div class="alert alert-info" style="border:2px double #00ccff">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <p> @TempData["InfoNote"]</p>
+        </div>
+    }
+    if (TempData["WarningNote"] != null)
+    {
+        <div class="alert alert-warning" style="border:2px double orange">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <p> @TempData["WarningNote"]</p>
+        </div>
+    }
+    if (TempData["ErrorNote"] != null)
+    {
+        <div class="alert alert-warning" style="border:2px double orange">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <p> @TempData["ErrorNote"]</p>
+        </div>
+    }
+}

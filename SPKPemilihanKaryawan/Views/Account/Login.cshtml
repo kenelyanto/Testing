@@ -1,0 +1,62 @@
+﻿@using SPKPemilihanKaryawan.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<script type="text/javascript">
+
+    function trimAndToLower() {
+
+        $('#Email').not(function () {
+            var x = this.value.toString().trim().toLowerCase();
+            $('#Email').val(x);
+        });
+
+    }
+</script>
+<OBJECT id="SatoActiveX" width="0" height="0" name="SatoActiveX" classid="clsid:714DA2FF-C9CB-4F28-988A-0081CD85CB91" VIEWASTEXT codebase="/WeeferSatoActiveX.cab"></OBJECT>
+<h1>Login</h1>
+<p>Welcome to Sistem Pendukung Keputusan </p>
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    var display = "display-hide";
+    if (!ViewData.ModelState.IsValid)
+    {
+        display = null;
+    }
+
+    <div class="alert alert-danger @display ">
+        <button class="close" data-close="alert"></button>
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-solid placeholder-no-fix", type = "text", autocomplete = "off", placeholder = "Email" })
+        </div>
+        <div class="col-xs-6">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix", type = "password", autocomplete = "off", placeholder = "Password" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="rem-password">
+                <p>
+                    Remember Me
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "rem-checkbox" })
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-8 text-right">
+            <div class="">
+            
+            </div>
+            <button class="btn blue" onclick="trimAndToLower()" type="submit">Sign In</button>
+        </div>
+    </div>
+}
